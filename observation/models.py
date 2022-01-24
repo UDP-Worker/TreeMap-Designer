@@ -9,3 +9,16 @@ class InfoField(models.Model):
 
     def __str__(self):
         return self.field_name
+
+class InfoLine(models.Model):
+    """储存每一条具体的信息"""
+    field = models.ForeignKey(InfoField,on_delete=models.CASCADE)
+    text = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        """重写类以使Django使用Infolines而非Infoline来表示多个条目"""
+        verbose_name_plural = 'Infolines'
+
+    def __str__(self):
+        return self.text[:100] + "……"
