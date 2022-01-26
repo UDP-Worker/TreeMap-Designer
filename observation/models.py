@@ -15,10 +15,28 @@ class InfoLine(models.Model):
     field = models.ForeignKey(InfoField,on_delete=models.CASCADE)
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
+    #关于信息的重要性
+    EMERGENCY = 'EM'
+    CONCERN = 'CO'
+    CRUCIAL = 'CR'
+    PLAIN = 'PL'
+    MEANINGLESS = 'ME'
+    importance_choice = (
+        (EMERGENCY, 'Emergency'),
+        (CONCERN, 'Concern'),
+        (CRUCIAL, 'Crucial'),
+        (PLAIN, 'plain'),
+        (MEANINGLESS,'Meaningless'),
+    )
+    importance = models.CharField(
+        max_length=2,
+        choices=importance_choice,
+        default=PLAIN,
+    )
 
     class Meta:
         """重写类以使Django使用Infolines而非Infoline来表示多个条目"""
         verbose_name_plural = 'Infolines'
 
     def __str__(self):
-        return self.text[:100] + "……"
+        return self.importance + self.text[:50] + '…'
