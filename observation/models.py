@@ -22,11 +22,11 @@ class InfoLine(models.Model):
     PLAIN = 'PL'
     MEANINGLESS = 'ME'
     importance_choice = (
-        (EMERGENCY, 'Emergency'),
-        (CONCERN, 'Concern'),
-        (CRUCIAL, 'Crucial'),
-        (PLAIN, 'plain'),
-        (MEANINGLESS,'Meaningless'),
+        (EMERGENCY, '紧急'),
+        (CONCERN, '值得关注'),
+        (CRUCIAL, '相对重要'),
+        (PLAIN, '普通'),
+        (MEANINGLESS,'毫无意义'),
     )
     importance = models.CharField(
         max_length=2,
@@ -39,4 +39,4 @@ class InfoLine(models.Model):
         verbose_name_plural = 'Infolines'
 
     def __str__(self):
-        return self.importance + self.text[:50] + '…'
+        return self.get_importance_display() + ' : ' + self.text[:50] + '…'
