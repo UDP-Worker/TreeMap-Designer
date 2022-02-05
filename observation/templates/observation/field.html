@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>field</title>
+</head>
+<body>
+    {% extends 'observation/base.html' %}
+    {% block content %}
+        <p>A Certain Infofield:{{ field }}</p>
+        <p>Information Included:</p>
+            <ul>
+                {% for infoline in infolines %}
+                    <li>
+                        <p>{{ infoline.get_importance_display }}</p>
+                        <p>{{ infoline.date_added|date:'M d, Y H:i' }}</p>
+                        <p>{{ infoline.text|linebreaks }}</p>
+                    </li>
+                {% empty %}
+                    <li>
+                        There isn't any information in this field.
+                    </li>
+                {% endfor %}
+            </ul>
+    {% endblock content %}
+</body>
+</html>

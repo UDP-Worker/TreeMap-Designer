@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Infomation Fields</title>
+</head>
+<body>
+    {% extends 'observation/base.html' %}
+    {% block content %}
+        <p>Infomation Fields</p>
+            <ul>
+                {% for field in fields %}
+                    <li>
+                        <a href="{% url 'observation:field' field.id %}">{{ field }}</a>
+                    </li>
+                {% empty %}
+                    <li>No Information Fields Yet.</li>
+                {% endfor %}
+            </ul>
+    {% endblock content %}
+</body>
+</html>

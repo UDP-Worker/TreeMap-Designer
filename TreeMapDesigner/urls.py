@@ -19,7 +19,6 @@ from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('', admin.site.urls),
     path('',include(('observation.urls','observation'),namespace='observation')),
 
 ]
